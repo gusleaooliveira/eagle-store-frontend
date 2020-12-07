@@ -3,7 +3,7 @@ import Cabecalho from '../Cabecalho';
 
 function Cadastrar(props){
     const [usuario, setUsuario] = useState(
-        {nome: '', sobrenome: '', email: '', usuario: '', senha: '',tipo: '' }
+        {nome: '', sobrenome: '', email: '', usuario: '', senha: '',tipo: [''] }
     );
 
     function handleChange(e){
@@ -12,7 +12,7 @@ function Cadastrar(props){
     }
 
     function handleClick(e){
-        usuario['tipo']=''
+        usuario['tipo']= ['5fce8230cedc06a05dcdd6d6']
         let cabecalho = { 'Content-Type': 'application/json'}
         console.log(usuario, cabecalho);
 
@@ -22,7 +22,7 @@ function Cadastrar(props){
                 .then((res) => {alert('Sucesso ao executar!')})
                 .catch((erro) => {alert('Erro ao executar!')})
         
-        setUsuario({nome: '', sobrenome: '', email: '', usuario: '', senha: '', tipo: '' })
+        setUsuario({nome: '', sobrenome: '', email: '', usuario: '', senha: '', tipo: [''] })
         document.querySelector('#formulario').reset();
     }
 
