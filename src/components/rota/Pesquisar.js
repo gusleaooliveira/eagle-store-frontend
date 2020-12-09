@@ -15,10 +15,11 @@ function Pesquisar(props){
                     {(erro, response, isLoading, makeRequest, axios)=>{
                         if(erro)return <p>Erro!</p>
                         if(isLoading)return <p>Carregando!</p>
-                        if(response == null) return <p> Nenhum foi encontrado!</p>
+                        if(response.data.length == 0) return <p> Nenhum foi encontrado!</p>
                         if(response != null){
                             let codigo = []
                             codigo.push(<section className="w3-container w3-panel">
+                                            
                                             {response.data.map((valores, erro) => {
                                                 return <div className="w3-container w3-panel">
                                                             <Link className="w3-button w3-blue largura" to={"/aplicativo/"+valores._id}>
@@ -38,7 +39,7 @@ function Pesquisar(props){
                                         </section>)
                             return codigo
                         }
-                        return <p>Nem carregou!</p>
+                        return <p>Não aconteceu nada!</p>
                     }}
                 </Get>
             </section>
