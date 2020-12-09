@@ -27,7 +27,7 @@ function Comentarios(props){
         let cabecalho = { 'Content-Type': 'application/json' };
         console.log(comentario, cabecalho);
 
-            fetch(`http://localhost:5000/api/comentario/`, {
+            fetch(`https://eagle-store.herokuapp.com/api/comentario/`, {
                 method: 'POST', headers: cabecalho, body: JSON.stringify(comentario)
             })
                 .then((res) => {alert('Sucesso ao executar!')})
@@ -70,7 +70,7 @@ function Comentarios(props){
                 </form>
                 <section className="w3-container w3-panel">
                     {isRecarregar == true &&
-                        <Get  url={"http://localhost:5000/api/comentario/aplicativo/"+props.id} >
+                        <Get  url={"https://eagle-store.herokuapp.com/api/comentario/aplicativo/"+props.id} >
                         {(erro, response, isLoading, makeRequest, axios) => {
                             if(erro) return <p>Erro!</p>
                             if(isLoading) return <p> Carregando!</p>

@@ -20,7 +20,7 @@ function Inicio(props){
     return  <section className="w3-container w3-panel">
                 <Cabecalho titulo={props.titulo} />
                 
-                <Get url="http://localhost:5000/api/aplicativo/destaque/1">
+                <Get url="https://eagle-store.herokuapp.com/api/aplicativo/destaque/1">
                         {(erro,response, isLoading, makeRequest, axios)=>{
                             if(erro)return <p>Erro!</p>
                             if(isLoading)return <p>Carregando!</p>
@@ -40,7 +40,7 @@ function Inicio(props){
                     
                 
                 <div className="w3-row">
-                    <Get url="http://localhost:5000/api/aplicativo/destaque/4">
+                    <Get url="https://eagle-store.herokuapp.com/api/aplicativo/destaque/4">
                         {(erro,response, isLoading, makeRequest, axios)=>{
                             if(erro)return <p>Erro!</p>
                             if(isLoading)return <p>Carregando!</p>
@@ -62,7 +62,7 @@ function Inicio(props){
                     </Get>
                 </div>
                 <div className="w3-row">
-                    <Get url="http://localhost:5000/api/aplicativo/destaque/4">
+                    <Get url="https://eagle-store.herokuapp.com/api/aplicativo/destaque/4">
                         {(erro,response, isLoading, makeRequest, axios)=>{
                             if(erro)return <p>Erro!</p>
                             if(isLoading)return <p>Carregando!</p>
@@ -84,7 +84,7 @@ function Inicio(props){
                     </Get>
                 </div>
                 <div className="w3-row">
-                    <Get url="http://localhost:5000/api/categoria/">
+                    <Get url="https://eagle-store.herokuapp.com/api/categoria/">
                         {(erro,response, isLoading, makeRequest, axios)=>{
                             if(erro)return <p>Erro!</p>
                             if(isLoading)return <p>Carregando!</p>

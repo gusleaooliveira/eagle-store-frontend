@@ -7,6 +7,7 @@ import Categoria from './rota/Categoria';
 import Inicio from './rota/Inicio'
 import Login from './rota/Login';
 import cookie from 'react-cookies'
+import Pesquisar from './rota/Pesquisar';
 
 function Rotas(props){
     const [token, setToken] = useState({
@@ -29,6 +30,8 @@ function Rotas(props){
                 </Route>
                 <Route path='/categoria/:id' children={<Categoria titulo="Categoria" /> } />
                 <Route path='/aplicativo/:id' children={<Aplicativo titulo="Aplicativo" /> } />
+                <Route path='/pesquisar/:id' children={<Pesquisar titulo="Pesquisar" /> } />
+
             </Switch>
 }
 
