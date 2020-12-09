@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Get } from 'react-axios';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Cabecalho from '../Cabecalho';
+import cookie from 'react-cookies'
 
 function Categoria(props){
-    let { id } = useParams();   
+    let { id } = useParams();  
+    const [token, setToken] = useState({
+        token: cookie.loadAll()
+      })
+    
+      useEffect(() =>{
+        console.log(token);
+      })
+
     return  <div>
                 <Cabecalho titulo={props.titulo} />
                 <Get url={"http://localhost:5000/api/aplicativo/categoria/"+id}>

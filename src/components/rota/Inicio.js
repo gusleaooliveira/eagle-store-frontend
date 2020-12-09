@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Get } from 'react-axios';
 import Cabecalho from '../Cabecalho';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTablet, faMobile, faTag } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import { useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min';
-
+import cookie from 'react-cookies'
 
 function Inicio(props){
     let { path, url } = useRouteMatch(); 
+    const [token, setToken] = useState({
+        token: cookie.loadAll()
+    })
 
+    useEffect(() =>{
+        console.log(token);
+    })
+    
     return  <section className="w3-container w3-panel">
                 <Cabecalho titulo={props.titulo} />
                 

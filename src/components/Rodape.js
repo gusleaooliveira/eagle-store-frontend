@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import cookie from 'react-cookies'
 
 function Rodape(props) {
+    const [token, setToken] = useState({
+        token: cookie.loadAll()
+      })
+    
+      useEffect(() =>{
+        console.log(token);
+      })
+      
     return  <footer className="w3-container w3-painel w3-light-gray">
                 <div className="w3-row">
                     <div className="w3-col m4 l3">

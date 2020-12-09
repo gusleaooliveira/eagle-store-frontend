@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Get } from 'react-axios';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -6,9 +6,17 @@ import Cabecalho from '../Cabecalho';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 import Comentarios from './Comentarios';
+import cookie from 'react-cookies'
 
 function Aplicativo(props){
     let { id } = useParams()
+    const [token, setToken] = useState({
+        token: cookie.loadAll()
+      })
+    
+      useEffect(() =>{
+        console.log(token);
+      })
     return  <div>
             <Cabecalho titulo={props.titulo} />
             <Get url={"http://localhost:5000/api/aplicativo/"+id}>

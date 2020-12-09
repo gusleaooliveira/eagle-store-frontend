@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Cabecalho from '../Cabecalho';
+import cookie from 'react-cookies'
 
 function Cadastrar(props){
     const [usuario, setUsuario] = useState(
         {nome: '', sobrenome: '', email: '', usuario: '', senha: '',tipo: [''] }
     );
-
+    const [token, setToken] = useState({
+        token: cookie.loadAll()
+      })
+    
+      useEffect(() =>{
+        console.log(token);
+      })
     function handleChange(e){
         usuario[e.target.id]=e.target.value;
         console.log(usuario);
@@ -19,8 +26,8 @@ function Cadastrar(props){
             fetch(`http://localhost:5000/api/usuario/`,{
                 method: 'POST', headers: cabecalho, body: JSON.stringify(usuario)
             })
-                .then((res) => {alert('Sucesso ao executar!')})
-                .catch((erro) => {alert('Erro ao executar!')})
+                .then((res) => {alert('Sucesso ao executar!');  })
+                .catch((erro) => {alert('Erro ao executar!'); })
         
         setUsuario({nome: '', sobrenome: '', email: '', usuario: '', senha: '', tipo: [''] })
         document.querySelector('#formulario').reset();

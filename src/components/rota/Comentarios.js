@@ -2,13 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Get } from 'react-axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons'
-
+import cookie from 'react-cookies'
 function Comentarios(props){
     const [comentario, setComentario] = useState(
         {nome: '', email: '', aplicativo: '', classificacao: '', comentario: ''} 
     );
     const [isRecarregar, setRecarregar] = useState(true)
- 
+    const [token, setToken] = useState({
+        token: cookie.loadAll()
+      })
+    
+      useEffect(() =>{
+        console.log(token);
+      })
+
     function handleChange(e) {
         comentario[e.target.id]=e.target.value;
         setRecarregar(false)
