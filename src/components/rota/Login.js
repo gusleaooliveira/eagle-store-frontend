@@ -13,10 +13,14 @@ function Login(props){
     const [token, setToken] = useState({
         token: cookie.loadAll()
       })
-    
+
+      function componentWillMount() {
+        token['token'] = cookie.loadAll()
+      }
+
       useEffect(() =>{
+        token['token'] = cookie.loadAll()
         console.log(token);
-        console.log(log);
       })
 
     function handleChange(e) {
@@ -34,9 +38,10 @@ function Login(props){
         fetch(`http://localhost:5000/api/login/`,{
             method: 'POST', headers: cabecalho, body: JSON.stringify(usuario)
         })
-            .then((res) => {
-                cookie.save('token', usuario)
-                alert('Sucesso ao logar')  
+            .then((res) => res.json())
+            .then((data) => {
+                cookie.save('token', data)
+                alert('Sucesso ao logar')
             })
             .catch((erro) => {
                 cookie.remove('token')

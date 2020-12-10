@@ -1,21 +1,36 @@
 import { func } from 'prop-types'
-import  React from 'react'
+import  React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Get } from 'react-axios'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import Cabecalho from '../Cabecalho'
+import cookie from 'react-cookies'
 
 function Pesquisar(props){
     let { id } = useParams()
 
+    const [token, setToken] = useState({
+        token: cookie.loadAll()
+      })
+
+      
+    function componentWillMount() {
+        token['token'] = cookie.loadAll()
+      }
+
+      useEffect(() =>{
+        token['token'] = cookie.loadAll()
+        console.log(token);
+      })
+      
     return  <section className="w3-container w3-panel">
                 <Cabecalho titulo={props.titulo} />
 
-                <Get url={"https://eagle-store.herokuapp.com/api/aplicativo/pesquisar/"+id} >
+                <Get url={"http://localhost:5000/api/aplicativo/pesquisar/"+id} >
                     {(erro, response, isLoading, makeRequest, axios)=>{
                         if(erro)return <p>Erro!</p>
                         if(isLoading)return <p>Carregando!</p>
-                        if(response.data.length == 0) return <p> Nenhum foi encontrado!</p>
+                        if(response != null && response.data.length == 0) return <p> Nenhum aplicativo foi encontrado!</p>
                         if(response != null){
                             let codigo = []
                             codigo.push(<section className="w3-container w3-panel">

@@ -11,13 +11,18 @@ function Categoria(props){
         token: cookie.loadAll()
       })
     
+      function componentWillMount() {
+        token['token'] = cookie.loadAll()
+      }
+
       useEffect(() =>{
+        token['token'] = cookie.loadAll()
         console.log(token);
       })
 
     return  <div>
                 <Cabecalho titulo={props.titulo} />
-                <Get url={"https://eagle-store.herokuapp.com/api/aplicativo/categoria/"+id}>
+                <Get url={"http://localhost:5000/api/aplicativo/categoria/"+id}>
                     {(erro, response, isLoading, makeRequest, axios)=>{
                         if(erro)return <p>Erro!</p>
                         if(isLoading)return <p>Carregando!</p>

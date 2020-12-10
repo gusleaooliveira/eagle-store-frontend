@@ -14,12 +14,17 @@ function Aplicativo(props){
         token: cookie.loadAll()
       })
     
+      function componentWillMount() {
+        token['token'] = cookie.loadAll()
+      }
+
       useEffect(() =>{
+        token['token'] = cookie.loadAll()
         console.log(token);
       })
     return  <div>
             <Cabecalho titulo={props.titulo} />
-            <Get url={"https://eagle-store.herokuapp.com/api/aplicativo/"+id}>
+            <Get url={"http://localhost:5000/api/aplicativo/"+id}>
                 {(erro, response, isLoading, makeRequest, axios) => {
                     if(erro)return <p>Erro!</p>
                     if(isLoading)return <p>Carregando!</p>
@@ -31,7 +36,7 @@ function Aplicativo(props){
                                     </header>);
                         codigo.push(<section className="w3-container w3-panel ">
                                         <p className="w3-container w3-panel w3-justify indent">{response.data.descricao}</p>
-                                        <div class="w3-row">
+                                        <div className="w3-row">
                                             <div className="w3-col sm12 md6 l6 w3-center"><b>Licença:</b> {response.data.licenca} </div>
                                             <div className="w3-col sm12 md6 l6 w3-center"><b>Versão:</b> {response.data.versao} </div>
                                         </div>

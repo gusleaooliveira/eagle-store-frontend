@@ -10,7 +10,12 @@ function Cadastrar(props){
         token: cookie.loadAll()
       })
     
+      function componentWillMount() {
+        token['token'] = cookie.loadAll()
+      }
+
       useEffect(() =>{
+        token['token'] = cookie.loadAll()
         console.log(token);
       })
     function handleChange(e){
@@ -23,7 +28,7 @@ function Cadastrar(props){
         let cabecalho = { 'Content-Type': 'application/json'}
         console.log(usuario, cabecalho);
 
-            fetch(`https://eagle-store.herokuapp.com/api/usuario/`,{
+            fetch(`http://localhost:5000/api/usuario/`,{
                 method: 'POST', headers: cabecalho, body: JSON.stringify(usuario)
             })
                 .then((res) => {alert('Sucesso ao executar!');  })

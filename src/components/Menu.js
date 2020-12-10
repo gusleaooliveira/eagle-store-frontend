@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Fetch } from 'react-request';
 import { Get } from 'react-axios';
 import { Link } from 'react-router-dom';
 import cookie from 'react-cookies'
@@ -27,10 +26,14 @@ function Menu(props){
         console.log(pesquisar);       
     }
 
-    useEffect(() =>{
-    console.log(token);
-    console.log(pesquisar);
-    })
+    function componentWillMount() {
+        token['token'] = cookie.loadAll()
+      }
+
+      useEffect(() =>{
+        token['token'] = cookie.loadAll()
+        console.log(token);
+      })
 
     return  <div className="w3-top">
                 <nav className="w3-bar w3-light-gray ">
@@ -38,7 +41,7 @@ function Menu(props){
                     <div className="w3-dropdown-hover">
                         <button className="w3-button">Categorias</button>
                         <div className="w3-dropdown-content w3-bar-block w3-card-4">
-                            <Get url="https://eagle-store.herokuapp.com/api/categoria">
+                            <Get url="http://localhost:5000/api/categoria">
                                 {(error,response,isLoading,makeRequest,axios)=>{
                                     if(error)return <a href="" className="w3-bar-item w3-button">Erro</a>
                                     if(isLoading)return <a href="" className="w3-bar-item w3-button">Carregando!</a>
@@ -55,27 +58,13 @@ function Menu(props){
                         </div>
                     </div>
                     
-                    <Link to="/login" className="w3-bar-item w3-right w3-button">Login</Link>
-                    <button className="w3-bar-item w3-right w3-button" onClick={
-                        () =>{
-                            fetch(`https://eagle-store.herokuapp.com/api/login/logout`,{
-                                method: 'GET'
-                            })
-                                .then((res) => {
-                                    cookie.remove( 'token')
-                                    alert('Sucesso ao deslogar')  
-                                })
-                                .catch((erro) => {
-                                    alert('Erro ao executar!')
-                                })
-
-                        }
-                    }>Logout</button>
-
+                    {token.token.token == undefined && <Link to="/login" className="w3-bar-item w3-right w3-button">Login</Link>}
+                    {token.token.token != undefined && <button className="w3-bar-item w3-right w3-button" onClick={() =>{ cookie.remove('token'); token.token = cookie.loadAll(); alert('Sucesso ao deslogar'); window.location.reload()}}>Logout</button> }
+                    <Link to="/usuario" className="w3-bar-tem w3-button w3-right" >Seu usuário</Link>
                     <Link to={"/pesquisar/"+pesquisar} className="w3-bar-item w3-right w3-button" onClick={handleClick}>
                         <FontAwesomeIcon icon={faSearch} />
                     </Link> 
-                    <input type="text" class=" w3-right w3-bar-item w3-input" onChange={handleChange} id="pesquisar" placeholder="Pesquisar ..."/>
+                    <input type="text" className=" w3-right w3-bar-item w3-input" onChange={handleChange} id="pesquisar" placeholder="Pesquisar ..."/>
                     
                 </nav>
             </div>

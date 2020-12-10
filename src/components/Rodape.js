@@ -6,7 +6,12 @@ function Rodape(props) {
         token: cookie.loadAll()
       })
     
+      function componentWillMount() {
+        token['token'] = cookie.loadAll()
+      }
+
       useEffect(() =>{
+        token['token'] = cookie.loadAll()
         console.log(token);
       })
       

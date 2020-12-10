@@ -6,10 +6,15 @@ function Cabecalho(props){
         token: cookie.loadAll()
     })
     
-    useEffect(() =>{
+    function componentWillMount() {
+        token['token'] = cookie.loadAll()
+      }
+
+      useEffect(() =>{
+        token['token'] = cookie.loadAll()
         console.log(token);
-    })
-    
+      })
+      
     return  <header className="w3-container w3-panel">
                 <h1 className="w3-center">{props.titulo}</h1>
             </header>
