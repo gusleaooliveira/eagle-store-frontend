@@ -44,6 +44,8 @@ function Comentarios(props){
     }
 
     return  <div>
+
+
                 <form id="formulario" className="w3-container w3-panel">
                     <div className="w3-row-padding">
                         <div className="w3-half">

@@ -24,25 +24,27 @@ function Rotas(props){
         console.log(token);
       })
 
-    return  <Switch>
-                <Route exact path="/">
-                    <Inicio titulo="Início"/>
-                </Route> 
-                <Route path='/cadastrar' >
-                    <Cadastrar titulo="Cadastrar" />
-                </Route>
-                <Route path='/login'>
-                    <Login titulo="Login" />
-                </Route>
-                <Route path='/usuario' >
-                  <Usuario titulo="Usuário" />
-                </Route>
-                <Route path='/categoria/:id' children={<Categoria titulo="Categoria" /> } />
-                <Route path='/aplicativo/:id' children={<Aplicativo titulo="Aplicativo" /> } />
-                <Route path='/pesquisar/:id' children={<Pesquisar titulo="Pesquisar" /> } />
-                
+    return  <div className="w3-container w3-panel">  
+              <Switch>
+                  <Route exact path="/">
+                      <Inicio titulo="Início"/>
+                  </Route> 
+                  <Route path='/cadastrar' >
+                      <Cadastrar titulo="Cadastrar" />
+                  </Route>
+                  <Route path='/login'>
+                      <Login titulo="Login" />
+                  </Route>
+                  <Route path='/usuario' >
+                    <Usuario titulo="Usuário" />
+                  </Route>
+                  <Route path='/categoria/:id' children={<Categoria titulo="Categoria" /> } />
+                  <Route path='/aplicativo/:id' children={<Aplicativo titulo="Aplicativo" /> } />
+                  <Route path='/pesquisar/:id' children={<Pesquisar titulo="Pesquisar" /> } />
+                  
 
-            </Switch>
+              </Switch>
+            </div>
 }
 
 export default Rotas;

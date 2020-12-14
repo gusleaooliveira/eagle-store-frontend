@@ -7,3 +7,8 @@
 .indent {
     text-indent: 30px;
 }
+@media only screen and (max-width: 600px) {
+    .hide-mobile {
+        display: none;    
+    }
+}

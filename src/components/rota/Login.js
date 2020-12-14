@@ -40,11 +40,13 @@ function Login(props){
         })
             .then((res) => res.json())
             .then((data) => {
-                cookie.save('token', data)
+                cookie.save('token', data.token)
+                cookie.save('usuario', data.usuario)
                 alert('Sucesso ao logar')
             })
             .catch((erro) => {
                 cookie.remove('token')
+                cookie.remove('usuario')
                 alert('Erro ao executar!')
             })
 
