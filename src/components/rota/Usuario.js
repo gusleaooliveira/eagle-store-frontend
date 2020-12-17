@@ -41,7 +41,7 @@ function Usuario(props) {
                                                             <p><b>Email:</b>{valores.email}</p>
                                                             <p><b>Usuário:</b>{valores.usuario}</p>
                                                             
-                                                            {console.error('log: ', valores.estado)}
+                                                            {/* {console.error('log: ', valores.estado)} */}
                                                             {valores.estado != undefined && <p><b>Estado:</b>{valores.estado}</p> } 
                                                             {valores.bairro != undefined &&  <p><b>Bairro:</b>{valores.bairro}</p> }
                                                             {valores.rua != undefined &&  <p><b>Rua:</b>{valores.rua}</p> }
