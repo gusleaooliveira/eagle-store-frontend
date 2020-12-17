@@ -11,19 +11,17 @@ function Cadastrar(props){
     const [token, setToken] = useState({ token: cookie.loadAll() })
     const [cep, setCep] = useState('')
 
-    function componentWillMount() { token['token'] = cookie.loadAll(); }
-
     useEffect(() =>{ token['token'] = cookie.loadAll(); })
 
     function handleChange(e){
         if(e.target.id == 'cep')setCep(e.target.value)
         usuario[e.target.id]=e.target.value;
-        console.log(usuario);
+        // console.log(usuario);
     }
     function handleFocus(e){
         if(e.target.id == 'cep')setCep(e.target.value)
         usuario[e.target.id]=e.target.value;
-        console.log(usuario);
+        // console.log(usuario);
     }
     
 
@@ -34,7 +32,7 @@ function Cadastrar(props){
         usuario['rua']=document.querySelector('#rua').value
         usuario['tipo']= ['5fce8230cedc06a05dcdd6d6']
         let cabecalho = { 'Content-Type': 'application/json'}
-        console.log(usuario, cabecalho);
+        // console.log(usuario, cabecalho);
 
         fetch(`http://localhost:5000/api/usuario/`,{ 
             method: 'POST', headers: cabecalho, body: JSON.stringify(usuario) 

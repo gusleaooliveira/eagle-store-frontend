@@ -13,26 +13,23 @@ function Login(props){
     const [token, setToken] = useState({
         token: cookie.loadAll()
       })
-
-      function componentWillMount() {
-        token['token'] = cookie.loadAll()
-      }
+     
 
       useEffect(() =>{
         token['token'] = cookie.loadAll()
-        console.log(token);
+        // console.log(token);
       })
 
     function handleChange(e) {
         usuario[e.target.id] = e.target.value;
-        console.log(usuario);
-        console.log(log);
+        // console.log(usuario);
+        // console.log(log);
     }
 
     function handleClick(e) {
         let cabecalho = { 'Content-Type': 'application/json' };
-        console.log(usuario, cabecalho);
-        console.log(log);
+        // console.log(usuario, cabecalho);
+        // console.log(log);
         
 
         fetch(`http://localhost:5000/api/login/`,{

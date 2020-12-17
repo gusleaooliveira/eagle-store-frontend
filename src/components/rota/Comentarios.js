@@ -8,29 +8,34 @@ function Comentarios(props){
         {nome: '', email: '', aplicativo: '', classificacao: '', comentario: ''} 
     );
     const [isRecarregar, setRecarregar] = useState(true)
+    
     const [token, setToken] = useState({
         token: cookie.loadAll()
       })
     
-      function componentWillMount() {
-        token['token'] = cookie.loadAll()
-      }
-
+      const [usuario, setUsuario] = useState({
+        usuario: JSON.parse(token['token'].usuario).usuario,
+        senha: JSON.parse(token['token'].usuario).senha
+      })      
+  
+     
       useEffect(() =>{
         token['token'] = cookie.loadAll()
-        console.log(token);
+        // console.log('log: ', JSON.parse(token.token['usuario']), usuario, token.token['token']); 
       })
 
     function handleChange(e) {
         comentario[e.target.id]=e.target.value;
         setRecarregar(false)
-        console.log(comentario);
+        // console.log(comentario);
     }
 
     function handleClick(e) {
+        comentario['nome']=JSON.parse(token.token['usuario']).nome;
+        comentario['email']=JSON.parse(token.token['usuario']).email;
         comentario['aplicativo']=document.querySelector('#aplicativo').value;
-        let cabecalho = { 'Content-Type': 'application/json' };
-        console.log(comentario, cabecalho);
+        let cabecalho = { 'Content-Type': 'application/json', 'x-access-token': token.token['token'] };
+        // console.log(comentario, cabecalho);
 
             fetch(`http://localhost:5000/api/comentario/`, {
                 method: 'POST', headers: cabecalho, body: JSON.stringify(comentario)
@@ -48,18 +53,18 @@ function Comentarios(props){
 
                 <form id="formulario" className="w3-container w3-panel">
                     <div className="w3-row-padding">
-                        <div className="w3-half">
+                        {/* <div className="w3-half">
                             <label id="nome">Nome:</label>
                             <input type="text" className="w3-input" required onChange={handleChange} id="nome" placeholder="Digite seu nome" />       
                         </div>
                         <div className="w3-half">
                             <label id="email">Email:</label>
                             <input type="email" className="w3-input" required onChange={handleChange} id="email" placeholder="Digite seu email" /> 
-                        </div>
+                        </div> */}
                     </div>
 
                     <label id="classificacao">Classifique o app:</label>
-                    <select className="w3-select" id="classificacao" required onChange={handleChange} >
+                    <select className="w3-select" required id="classificacao" onChange={handleChange} >
                         <option value="0">Muito Ruim</option>
                         <option value="1">Ruim</option>
                         <option value="2">Medio</option>

@@ -1,28 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Get } from 'react-axios';
-import { Route, Switch, useParams } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch  } from 'react-router-dom';
 import Aplicativo from './rota/Aplicativo';
 import Cadastrar from './rota/Cadastrar';
 import Categoria from './rota/Categoria';
 import Inicio from './rota/Inicio'
 import Login from './rota/Login';
-import cookie from 'react-cookies'
 import Pesquisar from './rota/Pesquisar';
 import Usuario from './rota/Usuario';
 
 function Rotas(props){
-    const [token, setToken] = useState({
-        token: cookie.loadAll()
-      })
-    
-      function componentWillMount() {
-        token['token'] = cookie.loadAll()
-      }
 
-      useEffect(() =>{
-        token['token'] = cookie.loadAll()
-        console.log(token);
-      })
 
     return  <div className="w3-container w3-panel">  
               <Switch>

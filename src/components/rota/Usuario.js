@@ -8,28 +8,26 @@ function Usuario(props) {
     const [token, setToken] = useState({
         token: cookie.loadAll()
       })
-
-      
-    function componentWillMount() {
-        token['token'] = cookie.loadAll()
-      }
+    const [usuario, setUsuario] = useState({
+      usuario: JSON.parse(token['token'].usuario).usuario,
+      senha: JSON.parse(token['token'].usuario).senha
+    })      
 
       useEffect(() =>{
         token['token'] = cookie.loadAll()
-        console.log(token == undefined);
-        console.log(JSON.parse(token.token['token']).token);
+        // console.log('log: ', JSON.parse(token.token['usuario']), usuario, token.token['token']);        
       })
-      
-    const axiosInstance = axios.create({
-        headers: {'x-access-token': JSON.parse(token.token['token']).token}
-    })
 
+      const axiosInstance = axios.create({
+        headers: {'x-access-token': token.token['token']}
+    })
+      
     return <section className="w3-container w3-panel">
                 <Cabecalho titulo={props.titulo} />
-                
 
-                  <AxiosProvider instance={axiosInstance}>
-                    <Get url="http://localhost:5000/api/usuario/pesquisar" params={JSON.parse(token.token['usuario'])} >
+
+                <AxiosProvider instance={axiosInstance}>
+                    <Get url="http://localhost:5000/api/usuario/pesquisar" params={usuario} >
                         {(erro, response, isLoading, makeRequest, axios) =>{
                             if(erro) return <p>Erro!</p>
                             if(isLoading) return <p>Carregando!</p>
@@ -43,6 +41,12 @@ function Usuario(props) {
                                                             <p><b>Email:</b>{valores.email}</p>
                                                             <p><b>Usuário:</b>{valores.usuario}</p>
                                                             
+                                                            {console.error('log: ', valores.estado)}
+                                                            {valores.estado != undefined && <p><b>Estado:</b>{valores.estado}</p> } 
+                                                            {valores.bairro != undefined &&  <p><b>Bairro:</b>{valores.bairro}</p> }
+                                                            {valores.rua != undefined &&  <p><b>Rua:</b>{valores.rua}</p> }
+                                                            {valores.cidade != undefined &&  <p><b>Cidade:</b>{valores.cidade}</p> }
+                                                                          
                                                           </div>
                                               })}
                                             </section>)
@@ -51,10 +55,13 @@ function Usuario(props) {
                             return <p>Nem Carregou!</p>
                         }}
                     </Get>
-                  </AxiosProvider>
-
-
+                  </AxiosProvider> 
+                
             </section>
 }
 
 export default Usuario
+
+
+
+

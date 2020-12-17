@@ -13,14 +13,12 @@ function Pesquisar(props){
         token: cookie.loadAll()
       })
 
-      
-    function componentWillMount() {
-        token['token'] = cookie.loadAll()
-      }
+    
+    
 
       useEffect(() =>{
         token['token'] = cookie.loadAll()
-        console.log(token);
+        // console.log(token);
       })
       
     return  <section className="w3-container w3-panel">

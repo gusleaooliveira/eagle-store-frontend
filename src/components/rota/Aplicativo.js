@@ -13,14 +13,11 @@ function Aplicativo(props){
     const [token, setToken] = useState({
         token: cookie.loadAll()
       })
-    
-      function componentWillMount() {
-        token['token'] = cookie.loadAll()
-      }
+ 
 
       useEffect(() =>{
         token['token'] = cookie.loadAll()
-        console.log(token);
+        // console.log(token);
       })
     return  <div>
             <Cabecalho titulo={props.titulo} />

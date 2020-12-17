@@ -17,13 +17,11 @@ function Menu(props){
 
     function handleChange(e) {
         setPesquisar(e.target.value)
-        console.log(pesquisar);
     }
 
     function handleClick(e) {
         setPesquisar('')
-        document.querySelector('#pesquisar').value = "";
-        console.log(pesquisar);       
+        document.querySelector('#pesquisar').value = "";  
     }
 
     function componentWillMount() {
@@ -32,7 +30,6 @@ function Menu(props){
 
       useEffect(() =>{
         token['token'] = cookie.loadAll()
-        console.log(token);
       })
 
     return  <div className="w3-top">
