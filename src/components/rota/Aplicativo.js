@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Cabecalho from '../Cabecalho';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClipboard } from '@fortawesome/free-solid-svg-icons';
+import { faClipboard, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import Comentarios from './Comentarios';
 import cookie from 'react-cookies'
 
@@ -17,7 +17,8 @@ function Aplicativo(props){
 
       useEffect(() =>{
         token['token'] = cookie.loadAll()
-        // console.log(token);
+
+        console.log('token=>{',token['token'].token == undefined,'}');
       })
     return  <div>
             <Cabecalho titulo={props.titulo} />
@@ -87,7 +88,16 @@ function Aplicativo(props){
                                             </div>
                                         </fieldset>
 
-                                        <Comentarios id={response.data._id} />
+                                        {token['token'].token != undefined && 
+                                            <Comentarios id={response.data._id} />
+                                        }
+                                        {token['token'].token == undefined && 
+                                            <p>
+                                                Faça login clicando em <Link to="/login" className="w3-bar-item w3-blue w3-button">
+                                                                        <span className="hide-mobile">Login </span>
+                                                                        <FontAwesomeIcon icon={faUserAlt} />
+                                                                    </Link> 
+                                            </p>}
                                     </section>);
                         return codigo;
                     }

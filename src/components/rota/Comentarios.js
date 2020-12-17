@@ -3,6 +3,9 @@ import { Get } from 'react-axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import cookie from 'react-cookies'
+import firebase from 'firebase'
+import { FirestoreCollection, FirestoreDocument, FirestoreProvider } from '@react-firebase/firestore'
+
 function Comentarios(props){
     const [comentario, setComentario] = useState(
         {nome: '', email: '', aplicativo: '', classificacao: '', comentario: ''} 
@@ -18,9 +21,19 @@ function Comentarios(props){
         senha: JSON.parse(token['token'].usuario).senha
       })      
   
-     
+      const config = {
+        apiKey: "AIzaSyAm4hQ2zN1niprt4gH6ETZuK3cWAhI9geI",
+        projectId: "eagle-store-3faa1",
+        databaseURL: "https://eagle-store-3faa1.firebaseio.com",
+        authDomain: "eagle-store-3faa1.firebaseapp.com",
+        // OPTIONAL
+        storageBucket: "eagle-store-3faa1.appspot.com",
+        messagingSenderId: "435483528196"
+      };
+
       useEffect(() =>{
         token['token'] = cookie.loadAll()
+
         // console.log('log: ', JSON.parse(token.token['usuario']), usuario, token.token['token']); 
       })
 
@@ -64,13 +77,31 @@ function Comentarios(props){
                     </div>
 
                     <label id="classificacao">Classifique o app:</label>
-                    <select className="w3-select" required id="classificacao" onChange={handleChange} >
-                        <option value="0">Muito Ruim</option>
-                        <option value="1">Ruim</option>
-                        <option value="2">Medio</option>
-                        <option value="3">Bom</option>
-                        <option value="4">Muito Bom</option>
-                    </select>
+                    <FirestoreProvider {...config} firebase={firebase}>
+                        <FirestoreCollection path="/classificacao/" >
+                            {data => { 
+                                // console.log(data.value);
+                                if (data.value != undefined){
+                                    return data.isLoading ? "Carregando" : <select className="w3-select" required id="classificacao" onChange={handleChange} >
+                                                                                {data.value.map((valor, indice) => {
+                                                                                    return <option value={valor.id}>{valor.valor}</option>
+                                                                                })}
+                                                                            </select>
+                                }
+                                else {
+                                    return <select className="w3-select" required id="classificacao" onChange={handleChange} >
+                                                <option value="0">Muito Ruim</option>
+                                                <option value="1">Ruim</option>
+                                                <option value="2">Medio</option>
+                                                <option value="3">Bom</option>
+                                                <option value="4">Muito Bom</option>
+                                            </select>
+                                } 
+                            }}
+                        </FirestoreCollection>       
+                    </FirestoreProvider>
+
+                    
 
                     <label id="comentario">Comentário:</label>
                     <textarea className="w3-input"  onChange={handleChange} required id="comentario" cols="50" rows="20" placeholder="Digite sua reclamação ou elogio aqui"></textarea>

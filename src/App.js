@@ -13,7 +13,8 @@ function App() {
   })
 
   useEffect(() =>{
-    console.log(token);
+    token['token'] = cookie.loadAll()
+    // console.log(token);
   })
 
   return (
